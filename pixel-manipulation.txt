@@ -1,0 +1,44 @@
+from PIL import Image
+
+def swap_pixels(img):
+    width, height = img.size
+    for x in range(width):
+        for y in range(height):
+            r, g, b = img.getpixel((x, y))
+            img.putpixel((x, y), (b, g, r))
+
+def encrypt_image(input_image_path, output_image_path):
+    img = Image.open(input_image_path)
+    swap_pixels(img)
+    img.save(output_image_path)
+
+def decrypt_image(input_image_path, output_image_path):
+    img = Image.open(input_image_path)
+    swap_pixels(img)
+    img.save(output_image_path)
+
+def main():
+    while True:
+        print("Choose an option:")
+        print("1. Encrypt an image")
+        print("2. Decrypt an image")
+        print("3. Exit")
+        choice = input("Enter your choice (1/2/3): ")
+
+        if choice == '1':
+            input_image_path = input("Enter the path to the image to encrypt: ")
+            output_image_path = input("Enter the path to save the encrypted image: ")
+            encrypt_image(input_image_path, output_image_path)
+            print(f"Image encrypted and saved as: {output_image_path}")
+        elif choice == '2':
+            input_image_path = input("Enter the path to the image to decrypt: ")
+            output_image_path = input("Enter the path to save the decrypted image: ")
+            decrypt_image(input_image_path, output_image_path)
+            print(f"Image decrypted and saved as: {output_image_path}")
+        elif choice == '3':
+            break
+        else:
+            print("Invalid choice. Please enter 1, 2, or 3.")
+
+if __name__ == "__main__":
+    main()
